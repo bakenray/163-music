@@ -5,12 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>管理页面</title>
-    
+    <style>
+        #container{
+            width:300px;
+            padding:20px;
+            border:2px dashed #ccc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius:4px;
+        }
+    </style>
 </head>
 <body>
     <audio controls src="http://pjm6pchne.bkt.clouddn.com/%E4%B9%89%E5%8B%87%E5%86%9B%E8%BF%9B%E8%A1%8C%E6%9B%B2.mp3"></audio>
     <div id="container">
-        <button id="upload">upload</button>
+        <span id="upload">点击或拖曳文件</span>
     </div>
 
 <!-- <script src="../node_modules/leancloud-storage/dist/av-min.js"></script> -->
@@ -89,9 +99,11 @@
           },
           'BeforeUpload': function(up, file) {
                  // 每个文件上传前，处理相关的事情
+                 alert('文件上传中...')
           },
           'UploadProgress': function(up, file) {
                  // 每个文件上传时，处理相关的事情
+                 
           },
           'FileUploaded': function(up, file, info) {
                  // 每个文件上传成功后，处理相关的事情
@@ -112,13 +124,13 @@
           'UploadComplete': function() {
                  //队列文件处理完毕后，处理相关的事情
           },
-          'Key': function(up, file) {
-              // 若想在前端对每个文件的key进行个性化处理，可以配置该函数
-              // 该配置必须要在unique_names: false，save_key: false时才生效
-              var key = "";
-              // do something with key here
-              return key
-          }
+        //   'Key': function(up, file) {
+        //       // 若想在前端对每个文件的key进行个性化处理，可以配置该函数
+        //       // 该配置必须要在unique_names: false，save_key: false时才生效
+        //       var key = "";
+        //       // do something with key here
+        //       return key
+        //   }
       }
   });
   // domain为七牛空间对应的域名，选择某个空间后，可通过 空间设置->基本设置->域名设置 查看获取
