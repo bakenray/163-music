@@ -5,14 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>管理页面</title>
-    
+    <style>
+        #container{
+            width:300px;
+            padding:35px 50px;
+            border:2px dashed #ccc;
+            border-radius:10px;
+            display: flex;
+            justify-content: center;
+            align-content: center;
+        }
+
+    </style>
 </head>
 <body>
-    <audio controls src="http://pjm6pchne.bkt.clouddn.com/%E4%B9%89%E5%8B%87%E5%86%9B%E8%BF%9B%E8%A1%8C%E6%9B%B2.mp3"></audio>
+    <audio controls src="http://pjm6pchne.bkt.clouddn.com/%E5%B0%8F%E7%B1%B3note2%E5%AE%A3%E4%BC%A0%E9%9F%B3%E4%B9%90.MP3"></audio>
     <div id="container">
-        <button id="upload">upload</button>
+        <span id="upload">点击或拖曳文件</span>
     </div>
-
+    <div id="uploadState"></div>
 <!-- <script src="../node_modules/leancloud-storage/dist/av-min.js"></script> -->
 <!-- <script>
     // leancloud初始化
@@ -42,6 +53,7 @@
 <script src="../node_modules/qiniu-js/dist/qiniu.min.js"></script>
 
 <script>
+    console.log(Qiniu)
   var uploader = Qiniu.uploader({
       runtimes: 'html5',      // 上传模式，依次退化
       browse_button: 'upload',         // 上传选择的点选按钮，必需
@@ -92,6 +104,7 @@
           },
           'UploadProgress': function(up, file) {
                  // 每个文件上传时，处理相关的事情
+                 uploadState.textContent = "文件上传中~"
           },
           'FileUploaded': function(up, file, info) {
                  // 每个文件上传成功后，处理相关的事情
@@ -104,7 +117,7 @@
                  // var domain = up.getOption('domain');
                  // var res = parseJSON(info.response);
                  // var sourceLink = domain +"/"+ res.key; 获取上传成功后的文件的Url
-                 alert('你的文件上传成功了')
+                 uploadState.textContent = "文件上传完成！"
           },
           'Error': function(up, err, errTip) {
                  //上传出错时，处理相关的事情
@@ -112,13 +125,13 @@
           'UploadComplete': function() {
                  //队列文件处理完毕后，处理相关的事情
           },
-          'Key': function(up, file) {
-              // 若想在前端对每个文件的key进行个性化处理，可以配置该函数
-              // 该配置必须要在unique_names: false，save_key: false时才生效
-              var key = "";
-              // do something with key here
-              return key
-          }
+        //   'Key': function(up, file) {
+        //       // 若想在前端对每个文件的key进行个性化处理，可以配置该函数
+        //       // 该配置必须要在unique_names: false，save_key: false时才生效
+        //       var key = "";
+        //       // do something with key here
+        //       return key
+        //   }
       }
   });
   // domain为七牛空间对应的域名，选择某个空间后，可通过 空间设置->基本设置->域名设置 查看获取
