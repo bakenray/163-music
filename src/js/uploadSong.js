@@ -43,11 +43,11 @@
                 domain: 'pjm6pchne.bkt.clouddn.com',     // bucket域名，下载资源时用到，必需
                 container:this.view.find('#uploadArea'),  // 上传区域DOM ID，默认是browser_button的父元素
                 max_file_size: '100mb',             // 最大文件体积限制
-              //   flash_swf_url: 'path/of/plupload/Moxie.swf',  //引入flash，相对路径
-              //   max_retries: 3,                     // 上传失败最大重试次数
+                //flash_swf_url: 'path/of/plupload/Moxie.swf',  //引入flash，相对路径
+                //max_retries: 3,                     // 上传失败最大重试次数
                 dragdrop: true,                     // 开启可拖曳上传
                 drop_element: this.view.find('#uploadArea'),          // 拖曳上传区域元素的ID，拖曳文件或文件夹后可触发上传
-              //   chunk_size: '4mb',                  // 分块上传时，每块的体积
+                // chunk_size: '4mb',                  // 分块上传时，每块的体积
                 auto_start: true,                   // 选择文件后自动上传，若关闭需要自己绑定事件触发上传
                 //x_vars : {
                 //    查看自定义变量
@@ -83,12 +83,17 @@
                            //    "key": "gogopher.jpg"
                            //  }
                            // 查看简单反馈
+                           uploadState.textContent = "文件上传完成！"
                            var domain = up.getOption('domain');
                            var res = JSON.parse(info.response);
                            var sourceLink = 'HTTP://'+ domain +"/"+ encodeURIComponent(res.key); //获取上传成功后的文件的Url
-                           uploadState.textContent = sourceLink + " "  +res.key
-          
-                           uploadState.textContent = "文件上传完成！"
+                        //    uploadState.textContent = sourceLink + " "  +res.key
+                        
+                           window.eventHub.emit('upload',{
+                               link:sourceLink,
+                               key:res.key
+                           })
+
                     },
                     'Error': function(up, err, errTip) {
                            //上传出错时，处理相关的事情

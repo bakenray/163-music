@@ -16,36 +16,15 @@
         </aside>
         <main></main>
     </div>
-<!-- <script src="../node_modules/leancloud-storage/dist/av-min.js"></script> -->
-<!-- <script>
-    // leancloud初始化
-    var APP_ID = 'y6tU3oB2pa1TNVp8X3K3Lqv6-gzGzoHsz';
-    var APP_KEY = 'XblY60nlFDjDnHgPgyas7NP4';
-    AV.init({
-      appId: APP_ID,
-      appKey: APP_KEY
-    });
-    // 创建数据库
-    var TestObject = AV.Object.extend('Playlist');
-    // 创建一条记录
-    var testObject = new TestObject();
-    // 保存记录
-    testObject.save({
-      name: 'testName',
-      cover:'testCover',
-      creatorId:'testId',
-      description:'testDes',
-      songs:['歌名1','歌名2']
-    }).then(function(object) {
-      alert('LeanCloud Rocks!');
-    },()=>{alert('fuck! 连接失败了')})
-</script> -->
+<script src="../node_modules/leancloud-storage/dist/av-min.js"></script>
+<script src="./js/initializers/av.js"></script>
 
 <script src="../node_modules/jquery/dist/jquery.min.js"></script>
 <script src="../vendors/moxie.min.js"></script>
 <script src="../node_modules/plupload/js/plupload.min.js"></script>
 <script src="../node_modules/qiniu-js/dist/qiniu.min.js"></script>
 
+<script src="./js/eventHub.js"></script>
 <script src="./js/songForm.js"></script>
 <script src="./js/newSong.js"></script>
 <script src="./js/songList.js"></script>
