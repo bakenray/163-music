@@ -11,15 +11,15 @@
             <form class="form">
                     <div class="row">
                         <label>歌曲名字：</label>
-                        <input name="name" type="text" value="__name__">
+                        <input name="name" type="text" value="__name__" autocomplete="off">
                     </div>
                     <div class="row">
                         <label>歌手名字：</label>
-                        <input name="singer" type="text" value="__singer__">
+                        <input name="singer" type="text" value="__singer__" autocomplete="off">
                     </div>  
                     <div class="row">
                         <label>外部连接：</label>
-                        <input name="url" type="text" value="__url__">
+                        <input name="url" type="text" value="__url__" autocomplete="off">
                     </div>     
                     <div class="row">
                         <button type="submit">保存</button>
@@ -33,8 +33,10 @@
             placeholders.map((string)=>{
                 html =html.replace(`__${string}__`, data[string] || '')
             })
-
             $(this.el).html(html)
+        },
+        reset(){
+            this.render({})
         }
     }
     let model ={
@@ -45,7 +47,6 @@
             id:''
         },
         create(data){
-
             var Song = AV.Object.extend('Song'); // 声明类型
             var song = new Song();              // 新建对象
 
@@ -54,10 +55,7 @@
             song.set('url',data.url);
             return song.save().then((newSong)=> {
               let {id,attributes} = newSong
-              Object.assign(this.data,{
-                  id,
-                  ...attributes
-              })
+              Object.assign(this.data,{id,...attributes})
             },(error) =>{
               console.error(error);
             });
@@ -84,10 +82,11 @@
                 })
                 this.model.create(data)
                     .then(()=>{
-                        console.log(this.model.data)
-                        this.view.render(this.model.data)
+                        this.view.reset()
+                        let string =JSON.stringify(this.model.data)
+                        let object =JSON.parse(string)
+                        window.eventHub.emit('created',object)
                     })
-                console.log(data)
             })
         }
     }
