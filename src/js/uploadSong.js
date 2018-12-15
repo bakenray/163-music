@@ -4,7 +4,11 @@
         template:`
         <div id="uploadArea">
             <div id="uploadState"></div>
-            <span id="upload">点击或拖曳文件</span>
+            <span id="upload">
+            点击或拖曳文件上传
+            <p class="limit-text">(文件大小不超过100MB )</p>
+            </span>
+            
         </div>
         `,
         render(data){
@@ -40,7 +44,7 @@
                 // Ajax请求downToken的Url，私有空间时使用，JS-SDK将向该地址POST文件的key和domain，服务端返回的JSON必须包含url字段，url值为该文件的下载地址
                 // unique_names: true,              // 默认false，key为文件名。若开启该选项，JS-SDK会为每个文件自动生成key（文件名）
                 // save_key: true,                  // 默认false。若在服务端生成uptoken的上传策略中指定了sava_key，则开启，SDK在前端将不对key进行任何处理
-                domain: 'pjm6pchne.bkt.clouddn.com',     // bucket域名，下载资源时用到，必需
+                domain: 'pjm6pchne.bkt.clouddn.com/',     // bucket域名，下载资源时用到，必需
                 container:this.view.find('#uploadArea'),  // 上传区域DOM ID，默认是browser_button的父元素
                 max_file_size: '100mb',             // 最大文件体积限制
                 //flash_swf_url: 'path/of/plupload/Moxie.swf',  //引入flash，相对路径
@@ -93,7 +97,6 @@
                                url:sourceLink,
                                name:res.key
                            })
-
                     },
                     'Error': function(up, err, errTip) {
                            //上传出错时，处理相关的事情
