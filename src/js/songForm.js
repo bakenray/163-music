@@ -69,7 +69,8 @@
             this.bindEvents()
             this.view.render(this.model.data)
             window.eventHub.on('upload',(data)=>{
-                this.view.render(data)
+                this.model.data =data
+                this.view.render(this.model.data)
             })
         },
         bindEvents(){
@@ -85,7 +86,11 @@
                         this.view.reset()
                         let string =JSON.stringify(this.model.data)
                         let object =JSON.parse(string)
-                        window.eventHub.emit('created',object)
+                        
+                        if(object.name !==''||object.url !==''){
+                            window.eventHub.emit('created',object)
+                        }
+                        
                     })
             })
         }

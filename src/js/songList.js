@@ -5,11 +5,13 @@
         render(data){
             let $el =$(this.el)
             $el.html(this.template)
+            
             let {songs} = data
             let liList =songs.map((song)=>$('<li></li>').text(song.name))
             $el.find('ul').empty()
             liList.map((domLi)=>{
                 $el.find('ul').append(domLi)
+
             })
         },
         clearActive(){

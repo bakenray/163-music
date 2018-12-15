@@ -31,11 +31,12 @@ body{
     border-bottom:1px solid #ccc;
     font-weight: bold;
 }
-.songList{
+.songList-container{
     flex-grow: 1;
     overflow: auto;
     margin-bottom:20px;
 }
+
 .songList>li{
     padding: 10px 15px;
     border-bottom:1px solid #ccc;
