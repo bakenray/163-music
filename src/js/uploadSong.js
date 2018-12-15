@@ -90,10 +90,10 @@
                            uploadState.textContent = "文件上传完成！"
                            var domain = up.getOption('domain');
                            var res = JSON.parse(info.response);
-                           var sourceLink = 'HTTP://'+ domain +"/"+ encodeURIComponent(res.key); //获取上传成功后的文件的Url
+                           var sourceLink = 'http://'+ domain +"/"+ encodeURIComponent(res.key); //获取上传成功后的文件的Url
                         //    uploadState.textContent = sourceLink + " "  +res.key
                         
-                           window.eventHub.emit('upload',{
+                           window.eventHub.emit('new',{
                                url:sourceLink,
                                name:res.key
                            })

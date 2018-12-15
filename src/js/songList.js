@@ -67,12 +67,12 @@
             })
         },
         bindEventHub(){
-            window.eventHub.on('upload',()=>{
-                this.view.clearActive()
-            })
             window.eventHub.on('created',(songData)=>{
                 this.model.data.songs.push(songData)
                 this.view.render(this.model.data)
+            })
+            window.eventHub.on('new',()=>{
+                this.view.clearActive()
             })
         }
     }

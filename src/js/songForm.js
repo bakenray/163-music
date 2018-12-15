@@ -1,13 +1,12 @@
 {
     let view={
         el:'.page>main',
+        elSon:'.page>main>.main-box',
         init(){
             this.$el =$(this.el)
         },
         template:`
         <div class="main-box">
-            
-            <h1>新建歌曲</h1>
             <form class="form">
                     <div class="row">
                         <label>歌曲名字：</label>
@@ -34,6 +33,13 @@
                 html =html.replace(`__${string}__`, data[string] || '')
             })
             $(this.el).html(html)
+
+            if(data.id){
+                $(this.elSon).prepend('<h1>编辑歌曲</h1>')
+            }
+            else{
+                $(this.elSon).prepend('<h1>新建歌曲</h1>')
+            }
         },
         reset(){
             this.render({})
@@ -49,7 +55,6 @@
         create(data){
             var Song = AV.Object.extend('Song'); // 声明类型
             var song = new Song();              // 新建对象
-
             song.set('name',data.name);
             song.set('singer',data.singer);
             song.set('url',data.url);
@@ -68,12 +73,18 @@
             this.view.init()
             this.bindEvents()
             this.view.render(this.model.data)
-            window.eventHub.on('upload',(data)=>{
-                this.model.data =data
-                this.view.render(this.model.data)
-            })
+
             window.eventHub.on('select',(data)=>{
                 this.model.data =data 
+                this.view.render(this.model.data)
+            })
+            window.eventHub.on('new',(data)=>{
+                if(this.model.data.id){
+                    this.model.data ={name:'',singer:'',url:'',id:''}
+                }
+                else{
+                    Object.assign(this.model.data,data)
+                }
                 this.view.render(this.model.data)
             })
         },
@@ -90,7 +101,6 @@
                         this.view.reset()
                         let string =JSON.stringify(this.model.data)
                         let object =JSON.parse(string)
-                        
                         if(object.name !==''||object.url !==''){
                             window.eventHub.emit('created',object)
                         }
