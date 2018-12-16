@@ -11,7 +11,7 @@ body{
 .page{
     display: flex;
     height: calc(100vh - 252px);
-    margin: 100px 15%;
+    margin: 100px 12%;
     border-radius: 10px;
     box-shadow: 0 4px 20px #d3d6e5;
     overflow: hidden;
