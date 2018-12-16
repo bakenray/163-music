@@ -10,10 +10,14 @@ body{
 }
 .page{
     display: flex;
-    height:calc(100vh - 50px);
+    height: calc(100vh - 252px);
+    margin: 100px 15%;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px #d3d6e5;
+    overflow: hidden;
 }
 .page > aside{
-    width:300px;
+    width:350px;
     background:#2b2f47;
     display: flex;
     flex-direction: column;
@@ -21,7 +25,7 @@ body{
 }
 .page > main{
     flex-grow:1;
-    padding:40px;
+    padding: 40px;
 }
 /* aside */
 .newSong{
@@ -68,7 +72,6 @@ body{
 .songList>li:hover{
     background: #1a1c31;
 }
-
 .upload-container{
     width:86%;
     margin:auto;
@@ -98,12 +101,15 @@ body{
 /* main */
 .page > main>.main-box{
     padding: 20px;
-    border-radius: 6px;
+    border-radius: 4px;
     border: 1px solid #f4f5f9;
     box-shadow: 0 4px 15px #e7e8f0;
 }
 .page > main>.main-box h1{
     margin:10px;
+    border-left: 4px solid #2b3147;
+    padding: 0 10px;
+    line-height: 1em;
 }
 .page > main form>.row{
     margin: 20px 10px;
@@ -114,11 +120,13 @@ body{
     outline:none;
     border:1px solid #ddd;
     border-radius:2px;
+    width: 87%;
 }
-
 .page > main form>.row>label{
     font-size:16px;
     margin-right:10px;
+    width: 11%;
+    display: inline-block;
 }
 .page > main form>.row>button{
     border: none;
@@ -133,4 +141,42 @@ body{
 .limit-text{
     font-size: 12px;
     color:#727999;
+}
+
+/* loding */
+.loading{
+    visibility: hidden;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.3);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+.loading::before{
+    content:'';
+    display: block;
+    width:100px;
+    height:100px;
+    background: #e22525;
+    position:absolute;
+    top:50%;
+    left:50%;
+    margin:-50px 0 0 -50px;
+    border-radius:50%; 
+    animation:loading .8s infinite alternate-reverse;
+}
+@keyframes loading{
+    0%{
+        border:1px solid #ccc;
+        transform:scale(0.05)
+    }
+    100%{
+        border:5px solid #ccc;
+        transform:scale(0.6)
+    }
+}
+.loading.active{
+    visibility: visible;
 }
