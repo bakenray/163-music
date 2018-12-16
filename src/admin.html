@@ -6,8 +6,30 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>管理页面</title>
     <link rel="stylesheet" href="./css/defaule.css">
+    <style>
+        header{
+            width:100%;
+            background:#C20C0C;
+            display: flex;
+            align-items: center;
+        }
+        header>img{
+            width:30px;
+            height:30px;
+            margin:10px 5px 10px 10px;
+        }
+        header>p{
+            font-size:18px;
+            font-weight: bold;
+            color:#fff;
+        }
+    </style>
 </head>
 <body>
+    <header>
+        <img src="./imgs/icon-logo.png" alt="logo">
+        <p>网易云音乐后台</p>
+    </header>
     <div class="page">
         <aside>
             <div class="newSong"></div>
@@ -16,6 +38,47 @@
         </aside>
         <main></main>
     </div>
+    <div id="siteLoading" class="loading"></div>
+
+    <style>
+    .loading{
+        visibility: hidden;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,.3);
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1;
+    }
+    .loading::before{
+        content:'';
+        display: block;
+        width:100px;
+        height:100px;
+        background: #e22525;
+        position:absolute;
+        top:50%;
+        left:50%;
+        margin:-50px 0 0 -50px;
+        border-radius:50%; 
+        animation:loading .8s infinite alternate-reverse;
+    }
+    .loading.active{
+        visibility: visible;
+    }
+    @keyframes loading{
+        0%{
+            border:1px solid #ccc;
+            transform:scale(0.05)
+        }
+        100%{
+            border:5px solid #ccc;
+            transform:scale(0.6)
+        }
+
+    }
+    </style>
 <script src="../node_modules/leancloud-storage/dist/av-min.js"></script>
 <script src="./js/initializers/av.js"></script>
 
@@ -23,8 +86,8 @@
 <script src="../vendors/moxie.min.js"></script>
 <script src="../node_modules/plupload/js/plupload.min.js"></script>
 <script src="../node_modules/qiniu-js/dist/qiniu.min.js"></script>
-
 <script src="./js/eventHub.js"></script>
+<script src="./js/loading.js"></script>
 <script src="./js/songForm.js"></script>
 <script src="./js/newSong.js"></script>
 <script src="./js/songList.js"></script>

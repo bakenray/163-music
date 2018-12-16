@@ -1,7 +1,10 @@
 {
     let view ={
         el:'.newSong',
-        template:`新建歌曲`,
+        template:`
+            <i class="icon icon-newsong"></i>
+            <span>新建歌曲</span>
+        `,
         render(data){
             $(this.el).html(this.template)
         }

@@ -8,7 +8,12 @@
             
             let {songs,selectedSongId} = data
             let liList =songs.map((song)=>{
-                let $li =$('<li></li>').text(song.name).attr('data-song-id',song.id) 
+                let $li =$('<li></li>')
+                let $icon = $('<i><i/>').addClass('icon icon-songlist')
+                let $litext = $('<span></span>').text(song.name)
+                $li.append($icon)
+                $li.append($litext).attr('data-song-id',song.id)
+                // $li.text(song.name).attr('data-song-id',song.id)
                 if(song.id === selectedSongId){
                     $li.addClass('active')
                 }
@@ -35,6 +40,7 @@
                     return {id:song.id,...song.attributes}
                 })
                 return songs
+                
             })
         }
     }
@@ -61,11 +67,13 @@
                 let data 
                 let songs =this.model.data.songs
                 for(let i =0;i<songs.length;i++){
+                    console.log(songId)
                     if(songs[i].id ===songId){
-                        data =songs[i]
+                        data = songs[i]
                         break
                     }
                 }
+
                 window.eventHub.emit('select',JSON.parse(JSON.stringify(data)))
             })
         },

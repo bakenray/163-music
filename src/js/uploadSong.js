@@ -74,6 +74,7 @@
                     },
                     'BeforeUpload': function(up, file) {
                            // 每个文件上传前，处理相关的事情
+                           window.eventHub.emit('beforeUpload')
                     },
                     'UploadProgress': function(up, file) {
                            // 每个文件上传时，处理相关的事情
@@ -87,6 +88,7 @@
                            //    "key": "gogopher.jpg"
                            //  }
                            // 查看简单反馈
+                           window.eventHub.emit('afterUpload')
                            uploadState.textContent = "文件上传完成！"
                            var domain = up.getOption('domain');
                            var res = JSON.parse(info.response);

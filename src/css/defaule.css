@@ -8,10 +8,9 @@ body{
     font-size: 12px;
     line-height: 1.5;
 }
-
 .page{
     display: flex;
-    height:100vh;
+    height:calc(100vh - 50px);
 }
 .page > aside{
     width:300px;
@@ -24,24 +23,52 @@ body{
     flex-grow:1;
     padding:40px;
 }
-
 /* aside */
-
 .newSong{
     padding: 10px 15px;
-    border-bottom: 1px solid #202234;
+    border-bottom: 1px solid #111524;
     font-weight: bold;
+    display: flex;
+    align-items: center;
+    cursor:pointer;
 }
+.newSong:hover{
+    background: #1a1c31;
+}
+.icon{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+.icon-newsong{
+    background-image: url(../imgs/icon-newsong.png);
+}
+.icon-songlist{
+    background-image: url(../imgs/icon-songlist.png);
+}
+
 .songList-container{
     flex-grow: 1;
     overflow: auto;
     margin-bottom:20px;
 }
-
 .songList>li{
     padding: 10px 15px;
     border-bottom:1px solid #202234;
+    display: flex;
+    align-items:center;
+    cursor:pointer;
 }
+.songList>li.active{
+    background: #1a1c31;
+}
+.songList>li:hover{
+    background: #1a1c31;
+}
+
 .upload-container{
     width:86%;
     margin:auto;
@@ -95,18 +122,15 @@ body{
 }
 .page > main form>.row>button{
     border: none;
-    background: #ccc;
+    background: #2b3047;
     padding: 8px 30px;
     border-radius: 2px;
     font-size: 16px;
-    border-bottom: 1px solid #c3c3c3;
+    border-bottom: 1px solid #25273b;
     cursor: pointer;
+    color: #fff;
 }
 .limit-text{
     font-size: 12px;
     color:#727999;
-}
-
-.active{
-    background: #24263b;
 }
