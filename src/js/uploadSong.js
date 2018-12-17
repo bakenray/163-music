@@ -18,7 +18,11 @@
            return  $(this.el).find(selector)[0]
         }
     }
-    let model={}
+    let model={
+        data:{
+            status:'open'
+        }
+    }
     let controller={
         init(view,model){
             this.view = view
@@ -67,20 +71,27 @@
                 //    }
                 //},
                 init: {
-                    'FilesAdded': function(up, files) {
+                    'FilesAdded': (up, files)=> {
                         plupload.each(files, function(file) {
                             // 文件添加进队列后，处理相关的事情
                         });
                     },
-                    'BeforeUpload': function(up, file) {
+                    'BeforeUpload': (up, file)=> {
                            // 每个文件上传前，处理相关的事情
+                           if(this.model.data.status ==='closed'){
+                                return false
+                           }
+                           else{
+                            this.model.data.status ='closed'
+                           }
+
                            window.eventHub.emit('beforeUpload')
                     },
-                    'UploadProgress': function(up, file) {
+                    'UploadProgress': (up, file)=> {
                            // 每个文件上传时，处理相关的事情
                            uploadState.textContent = "文件上传中..."
                     },
-                    'FileUploaded': function(up, file, info) {
+                    'FileUploaded': (up, file, info)=> {
                            // 每个文件上传成功后，处理相关的事情
                            // 其中info.response是文件上传成功后，服务端返回的json，形式如：
                            // {
@@ -88,6 +99,8 @@
                            //    "key": "gogopher.jpg"
                            //  }
                            // 查看简单反馈
+                           this.model.data.status ='open'
+
                            window.eventHub.emit('afterUpload')
                            uploadState.textContent = "文件上传完成！"
                            var domain = up.getOption('domain');
@@ -100,11 +113,11 @@
                                name:res.key
                            })
                     },
-                    'Error': function(up, err, errTip) {
+                    'Error': (up, err, errTip)=> {
                            //上传出错时，处理相关的事情
                            console.log(err)
                     },
-                    'UploadComplete': function() {
+                    'UploadComplete': ()=> {
                            //队列文件处理完毕后，处理相关的事情
                     },
                   //   'Key': function(up, file) {
