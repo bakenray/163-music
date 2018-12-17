@@ -20,7 +20,7 @@
                         <label>外部连接：</label>
                         <input name="url" type="text" value="__url__" autocomplete="off">
                     </div>     
-                    <div class="row">
+                    <div class="row submitRow">
                         <button type="submit">保存</button>
                     </div>         
             </form>

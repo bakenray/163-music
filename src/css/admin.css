@@ -4,16 +4,34 @@
 *::before{box-sizing: border-box}
 ul,ol{list-style: none}
 a{color:inherit;text-decoration: none}
+
 body{
     font-size: 12px;
     line-height: 1.5;
 }
+header{
+    width:100%;
+    background:#C20C0C;
+    display: flex;
+    align-items: center;
+}
+header>img{
+    width:30px;
+    height:30px;
+    margin:10px 5px 10px 10px;
+}
+header>p{
+    font-size:18px;
+    font-weight: bold;
+    color:#fff;
+}
+
 .page{
     display: flex;
     min-height: 470px;
-    min-width: 975px;
+    min-width: 910px;
     height: calc(100vh - 252px);
-    margin: 100px 12%;
+    margin: 100px 15%;
     border-radius: 10px;
     box-shadow: 0 4px 20px #d3d6e5;
     overflow: hidden;
@@ -55,7 +73,6 @@ body{
 .icon-songlist{
     background-image: url(../imgs/icon-songlist.png);
 }
-
 .songList-container{
     flex-grow: 1;
     overflow: auto;
@@ -117,23 +134,24 @@ body{
     margin: 20px 10px;
 }
 .page > main form>.row>input{
-    width:400px;
+    min-width: 323px;
     padding: 8px;
-    outline:none;
-    border:1px solid #ddd;
-    border-radius:2px;
-    width: 83%;
+    outline: none;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    width: 88%;
 }
 .page > main form>.row>label{
-    font-size:16px;
-    margin-right:10px;
-    width: 14%;
+    font-size: 16px;
+    margin: 5px;
+    min-width: 80px;
+    width: 10%;
     display: inline-block;
 }
 .page > main form>.row>button{
     border: none;
     background: #2b3047;
-    padding: 8px 30px;
+    padding: 8px 50px;
     border-radius: 2px;
     font-size: 16px;
     border-bottom: 1px solid #25273b;
@@ -144,7 +162,11 @@ body{
     font-size: 12px;
     color:#727999;
 }
-
+.submitRow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 /* loding */
 .loading{
     visibility: hidden;
