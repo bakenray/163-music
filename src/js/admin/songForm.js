@@ -104,7 +104,9 @@
             needs.map((string)=>{
                 data[string]=this.view.$el.find(`[name="${string}"]`).val()
             })
-            this.model.create(data)
+
+            if(data.name !=='' && data.singer !=='' && data.url !==''){
+                this.model.create(data)
                 .then(()=>{
                     this.view.reset()
                     let string =JSON.stringify(this.model.data)
@@ -113,6 +115,10 @@
                         window.eventHub.emit('created',object)
                     }
                 })
+            }
+            else{
+                alert('请填入歌曲信息')
+            }
         },
         update(){
             let data ={}
@@ -128,7 +134,6 @@
         bindEvents(){
             this.view.$el.on('submit','form',(e)=>{
                 e.preventDefault()
-
                 if(this.model.data.id){
                     this.update()
                 }
