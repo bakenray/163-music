@@ -58,25 +58,29 @@ header>.download>a{
     display: flex;
     justify-content: center;
     align-content: center;
+    position: relative;
 }
-.song-container>nav>li span{
+.song-container>nav>li>span{
+    display: inline-block;
+    width:100%;
     padding:0 5px;
-}.song-container>nav>li>div.active>span{
+    text-align: center;
+}
+.song-container>nav>li.active>span{
     color:#d33a31;
 }
-.song-container>nav>li>div.active::after{
+.song-container>nav>li.active::after{
     content: '';
-    width: 100%;
+    width: 80%;
     height: 2px;
     display: block;
     background: #d33a31;
-    position: relative;
-    top: -2px;
+    position: absolute;
+    bottom: 0px;
 }
 .song-container>main{
     margin-top:104px;
 }
-
 .title{
     height:50px;
     line-height: 50px;
@@ -89,6 +93,12 @@ header>.download>a{
     border-left:2px solid #d33a31;
     line-height: 1em;
     padding-left:4px;
+}
+.page-1,.page-2,.page-3{
+    display: none;
+}
+.page-1.active,.page-2.active,.page-3.active{
+    display: block;
 }
 .music>.song-list{
     display: flex;

@@ -19,26 +19,20 @@
             </div>
         </header>
         <div class="song-container">
-            <nav>
-                <li>
-                    <div class="active">
-                        <span class="active">推荐音乐</span>
-                    </div>
-                </li>
-                <li>
-                    <div>
+            <nav id="tabs">
+                    <li class=" active" data-tab-name='page-1'>
+                        <span>推荐音乐</span>
+                    </li>
+                    <li data-tab-name='page-2'>
                         <span>热歌榜</span>
-                    </div>
-                </li>
-                <li>
-                    <div>
+                        </li>
+                    <li data-tab-name='page-3'>
                         <span>搜索</span>
-                    </div>
-                </li>
+                    </li>
             </nav>
 
             <main>
-                <div class="music">
+                <div class="page-1 music active">
                     <div class="title">
                         <h5>推荐歌单</h5>
                     </div>
@@ -137,22 +131,35 @@
                             </li>
                         </ul>
                     </div>
+                    <footer>
+                            <a href="#">打开APP，发现更多好音乐</a>
+                    </footer>
                 </div>
-                <div class="hot-songs"></div>
-                <div class="search"></div>
+
+                <div class="page-2 hot-songs">
+                    <h1>热门歌曲</h1>
+                </div>
+
+                <div class="page-3 search">
+                    <h1>搜索</h1>
+                </div>
+
             </main>
-            <footer>
-                    <a href="#">打开APP，发现更多好音乐</a>
-            </footer>
+
         </div>
 
 
     </div>
-    <script src="//at.alicdn.com/t/font_970655_64k6yne63zt.js"></script>
+    <!-- 阿里图标 -->
+    <script src="//at.alicdn.com/t/font_970655_64k6yne63zt.js"></script> 
+
+    <script src="../node_modules/leancloud-storage/dist/av-min.js"></script>
+    <script src="./js/initializers/av.js"></script>
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
-    
-    <script>
-    
-    </script>
+    <script src='./js/admin/eventHub.js'></script>
+    <script src="./js/index/tabs.js"></script>
+    <script src="js/index/page-1.js"></script>
+    <script src="js/index/page-2.js"></script>
+    <script src="js/index/page-3.js"></script>
 </body>
 </html>
