@@ -144,3 +144,11 @@ header>.download>a{
     right:0;
     top:0;
 }
+
+/* icon */
+.icon {
+    width: 1em; height: 1em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+ }
