@@ -71,7 +71,7 @@ header>.download>a{
 }
 .song-container>nav>li.active::after{
     content: '';
-    width: 80%;
+    width: 60%;
     height: 2px;
     display: block;
     background: #d33a31;
