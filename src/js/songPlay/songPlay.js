@@ -1,6 +1,7 @@
 {
-    let view={}
-
+    let view={
+        
+    }
     let model= {
         data:{
             id:'',
@@ -8,13 +9,14 @@
             singer:'',
             url:''
         },
-        get(id){
+        getId(id){
             var query = new AV.Query('Song');
             return query.get(id).then((song) =>{
                 Object.assign(this.data,{id:song.id, ...song.attributes})
                 return song
             },  (error) =>{
-            });
+                console.log(error)
+            })
         }
     }
     let controller={
@@ -22,7 +24,7 @@
             this.view = view
             this.model = model
             let id = this.getSongId()
-            this.model.get(id).then(()=>{
+            this.model.getId(id).then(()=>{
                 console.log(this.model.data)
             })
         },
@@ -43,8 +45,8 @@
                     break
                 }
             }
+            return id
         }
     }
 controller.init(view,model)
-
 }
