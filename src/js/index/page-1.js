@@ -1,4 +1,13 @@
 {
+    var script1 = document.createElement('script')
+    script1.src = 'js/index/page-1-1.js'
+    document.body.appendChild(script1)
+
+    var script2 = document.createElement('script')
+    script2.src = 'js/index/page-1-2.js'
+    document.body.appendChild(script2)
+
+
     let view ={
         el:'.page-1',
         init(){
