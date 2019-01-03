@@ -1,22 +1,29 @@
 {
     let view = {
         el:'.new-songs',
+        template:`
+            <li>
+                <div class="newSong-list">
+                    <h5>{{song.name}}</h5>
+                    <p>{{song.singer}}</p>
+                </div>
+
+                <a href="./songPlay.html?id={{song.id}}">
+                    <span class="icon-play"></span>
+                </a>
+            </li>
+        `,
         init(){
             this.$el = $(this.el)
         },
         render(data){
             let {newSongs} = data
-
             newSongs.map((song)=>{
-                let $li = $(`
-                <li>
-                    <div class="newSong-list">
-                        <h5>${song.name}</h5>
-                        <p>${song.singer}</p>
-                    </div>
-                    <span class="icon-play"></span>
-                </li>
-                `)
+                let $li = $(this.template
+                    .replace('{{song.name}}',song.name)
+                    .replace('{{song.singer}}',song.singer)
+                    .replace('{{song.id}}',song.id)
+                )
                 this.$el.find('ul.new-songs-list').append($li)
             })
         }
