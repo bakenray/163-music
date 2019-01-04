@@ -5,142 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>播放歌曲</title>
-    
-    <style>
-*{margin:0;padding:0;}
-*{box-sizing: border-box}
-*::after{box-sizing: border-box}
-*::before{box-sizing: border-box}
-ul,ol,li{list-style: none}
-a{color:inherit;text-decoration: none}
 
-        .playBox{
-            width:100%;
-            height:100%;
-        }
-        .playBox::before{
-            content:'';
-            width:100%;
-            height:100%;
-            position:absolute;
-            top:0;
-            left:0;
-            background:transparent url('./imgs/singger.jpg') no-repeat;
-            background-size: cover;
-            filter:blur(10px);
-            z-index: -1;
-        }
-        header{
-            width:100%;
-            height:8vh;
-            background:#d43c33;
-            position: relative;
-        }
-        .title{
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color:#fff;
-        }
-        .title>h1{
-            font-size: 18px;
-        }
-        .title>h5{
-            font-size: 12px;
-        }
-        .playUI{
-            width:100%;
-            height:60vh;
-            position: relative;
-            overflow: hidden;
-        }
-        .backBtn{
-            width:15vw;
-            height:10vw;
-            position:absolute;
-            top:2.5vw;
-            left:2.5vw;
-            font-size: 14px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color:#fff;
-        }
-        .backBtn>img{
-            display: inline-block;
-            width:4.2vw;
-            height:4.2vw;
-        }
-        .playUI>.playimgBg{
-            width:70vw;
-            height:70vw;
-            position: absolute;
-            top:0;
-            left:0;
-            right:0;
-            bottom:0;
-            margin:auto;
-            border-radius:50%;
-        }
-        .playUI>.playimgBg>img{
-            display: inline-block;
-            position:absolute;
-            margin:auto;
-        }
-        .playUI>.playimgBg>.singger-img{
-            width:80%;
-            height:80%;
-            border-radius: 50%;
-            top:0;
-            left:0;
-            right:0;
-            bottom:0;
-        }
-        .playUI>.playimgBg>.bg-img{
-            width:100%;
-            height:100%;
-            top:0;
-            left:0;
-            right:0;
-            bottom:0;
-        }
-        .playUI>.playimgBg>.play-rod{
-            width: 14vw;
-            top: -22vw;
-            left: 31vw;
-        }
-        .playUI>.playimgControl{
-            width:45vw;
-            height:45vw;
-            position: absolute;
-            top:0;
-            left:0;
-            right:0;
-            bottom:0;
-            margin:auto;
-            border-radius:50%;
-        }
-        .songWords{
-            width:100%;
-            height:22vh;
-        }
-        .playControls{
-            width:100%;
-            height:10vh;
-        }
-    </style>
+    <link rel="stylesheet" href="./css/song-play.css">
+
 </head>
 <body>
     <!-- <div id="app"></div> -->
     <div class="playBox">
+        <div class="playBox-bg"></div>
         <header>
-            <div class="title">
-                <h1>{{song.name}}</h1>
-                <h5>{{song.singer}}</h5>
-            </div>
-
+            <div class="title"></div>
             <div class="backBtn">
                <img src="./imgs/icon-back.png" alt="">
                 <span>返回</span>
@@ -148,16 +22,17 @@ a{color:inherit;text-decoration: none}
         </header>
         <div class="playUI">
             <div class="playimgBg">
-                <img class="singger-img" src="./imgs/singger.jpg" alt="">
+                <img class="singger-img">
                 <img class="bg-img" src="./imgs/img-play-bg.png" alt="">
                 <img class="play-rod" src="./imgs/img-play-rod.png" alt="">
             </div>
-            <div class="playimgControl"></div>
+            <div class="playimgControl play-btn"></div>
         </div>
         <div class="songWords"></div>
-        <div class="playControls"></div>
+        <div class="playControls">
+            <audio src="#" controls ></audio>
+        </div>
     </div>
-
 
     <script src="../node_modules/leancloud-storage/dist/av-min.js"></script>
     <script src="./js/initializers/av.js"></script>

@@ -1,36 +1,72 @@
 {
     let view={
-        el:'#app',
+        el:'.playBox',
         template:`
-        <audio src={{url}}></audio>
-        <div class="controls">
-            <button class="play">播放</button>
-            <button class="pause">暂停</button>
-        </div>
+        <h1>{{name}}</h1>
+        <h5>{{singer}}</h5>
         `,
         render(data){
-            $(this.el).html(this.template.replace('{{url}}',data.url))
+            let {song,status} = data
+            $(this.el).find('.playBox-bg').css('background-image',`url(${song.cover})`)
+            $(this.el).find('.singger-img').attr('src',song.cover)
+
+            $(this.el).find('.title').html(
+                this.template
+                .replace('{{name}}',song.name)
+                .replace('{{singer}}',song.singer)
+            )
+            if($(this.el).find('audio').attr('src') !== song.url){
+                $(this.el).find('audio').attr('src',song.url)
+            }
+            if(status ==='playing'){
+                $(this.el).find('.singger-img').addClass('playing')
+                $(this.el).find('.bg-img').addClass('playing')
+            }
+            else{
+                $(this.el).find('.singger-img').removeClass('playing')
+                $(this.el).find('.bg-img').removeClass('playing')
+            }
         },
-        play(){
-            let audio =$(this.el).find('audio')[0]
-            audio.play()
+        playSong(){
+            $(this.el).find('audio')[0].play()
+            this.removePlayBtn()
+            this.startCircle()
         },
-        pause(){
-            let audio =$(this.el).find('audio')[0]
-            audio.pause()
+        pauseSong(){
+            $(this.el).find('audio')[0].pause()
+            this.addPlayBtn()
+            this.stopCircle()
+        },
+
+        removePlayBtn(){
+            $(this.el).find('.play-btn').removeClass('play-btn').addClass('pause-btn')
+        },
+        addPlayBtn(){
+            $(this.el).find('.playimgControl').addClass('play-btn').removeClass('pause-btn')
+        },
+        startCircle(){
+            $(this.el).find('.singger-img').addClass('circleAni')
+            $(this.el).find('.bg-img').addClass('circleAni')
+        },
+        stopCircle(){
+            $(this.el).find('.singger-img').removeClass('circleAni')
+            $(this.el).find('.bg-img').removeClass('circleAni')
         }
     }
     let model= {
         data:{
-            id:'',
-            name:'',
-            singer:'',
-            url:''
+            song:{
+                id:'',
+                name:'',
+                singer:'',
+                url:''
+            },
+            status:'paused'
         },
         getId(id){
             var query = new AV.Query('Song');
             return query.get(id).then((song) =>{
-                Object.assign(this.data,{id:song.id, ...song.attributes})
+                Object.assign(this.data.song,{id:song.id, ...song.attributes})
                 return song
             },  (error) =>{
                 console.log(error)
@@ -48,12 +84,18 @@
             this.bindEvents()
         },
         bindEvents(){
-            $(this.view.el).on('click','.play',()=>{
-                this.view.play()
+            $(this.view.el).on('click','.play-btn',()=>{
+                this.model.data.status =  'playing'
+                this.view.render(this.model.data)
+                this.view.playSong()
             })
-            $(this.view.el).on('click','.pause',()=>{
-                this.view.pause()
+
+            $(this.view.el).on('click','.pause-btn',()=>{
+                this.model.data.status =  'paused'
+                this.view.render(this.model.data)
+                this.view.pauseSong()
             })
+
         },
         getSongId(){
             let search = window.location.search
