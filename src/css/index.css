@@ -177,8 +177,8 @@ header>.download>a{
 }
 .music>.new-songs .icon-play {
     display: inline-block;
-    width: 55px;
-    height: 55px;
+    width: 50px;
+    height: 50px;
     position: absolute;
     right: 0;
     top: 0;
@@ -186,6 +186,7 @@ header>.download>a{
     background-repeat: no-repeat;
     background-size: 60%;
     background-position: center;
+    opacity: .5;
 }
 footer{
     width:100%;
