@@ -23,7 +23,11 @@
                     <div class="row">
                         <label>歌曲封面：</label>
                         <input name="cover" type="text" value="__cover__" autocomplete="off">
-                    </div>                         
+                    </div>
+                    <div class="row">
+                        <label>歌曲封面：</label>
+                        <textarea name="lyrics">__lyrics__</textarea>
+                    </div>                                             
                     <div class="row submitRow">
                         <button type="submit">保存</button>
                     </div>         
@@ -31,7 +35,7 @@
         </div>
         `,
         render(data={}){
-            let placeholders =['name','url','singer','id','cover']
+            let placeholders =['name','url','singer','id','cover','lyrics']
             let html =this.template
             placeholders.map((string)=>{
                 html =html.replace(`__${string}__`, data[string] || '')
@@ -55,7 +59,8 @@
             singer:'',
             url:'',
             id:'',
-            cover:''
+            cover:'',
+            lyrics:''
         },
         create(data){
             var Song = AV.Object.extend('Song'); // 声明类型
@@ -64,6 +69,7 @@
             song.set('singer',data.singer);
             song.set('url',data.url);
             song.set('cover',data.cover)
+            song.set('lyrics',data.lyrics)
             return song.save().then((newSong)=> {
               let {id,attributes} = newSong
               Object.assign(this.data,{id,...attributes})
@@ -77,6 +83,7 @@
             song.set('singer',data.singer)
             song.set('url',data.url)
             song.set('cover',data.cover)
+            song.set('lyrics',data.lyrics)
             return song.save().then((response)=>{
                 Object.assign(this.data,data)
                 return response
@@ -97,7 +104,7 @@
             })
             window.eventHub.on('new',(data)=>{
                 if(this.model.data.id){
-                    this.model.data ={name:'',singer:'',url:'',id:''}
+                    this.model.data ={name:'',singer:'',url:'',id:'',cover:'',lyrics:''}
                 }
                 else{
                     Object.assign(this.model.data,data)
@@ -107,7 +114,7 @@
         },
         create(){
             let data ={}
-            let needs = 'name singer url cover'.split(' ')
+            let needs = 'name singer url cover lyrics'.split(' ')
             needs.map((string)=>{
                 data[string]=this.view.$el.find(`[name="${string}"]`).val()
             })
@@ -129,7 +136,7 @@
         },
         update(){
             let data ={}
-            let needs = 'name singer url cover'.split(' ')
+            let needs = 'name singer url cover lyrics'.split(' ')
             needs.map((string)=>{
                 data[string]=this.view.$el.find(`[name="${string}"]`).val()
             })

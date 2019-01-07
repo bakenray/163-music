@@ -13,7 +13,6 @@
                 let $litext = $('<span></span>').text(song.name)
                 $li.append($icon)
                 $li.append($litext).attr('data-song-id',song.id)
-                // $li.text(song.name).attr('data-song-id',song.id)
                 if(song.id === selectedSongId){
                     $li.addClass('active')
                 }
@@ -67,13 +66,11 @@
                 let data 
                 let songs =this.model.data.songs
                 for(let i =0;i<songs.length;i++){
-                    console.log(songId)
                     if(songs[i].id ===songId){
                         data = songs[i]
                         break
                     }
                 }
-
                 window.eventHub.emit('select',JSON.parse(JSON.stringify(data)))
             })
         },

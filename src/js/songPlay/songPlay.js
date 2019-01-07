@@ -19,6 +19,9 @@
             if($(this.el).find('audio').attr('src') !== song.url){
                 var audio = $(this.el).find('audio').attr('src',song.url).get(0)
                 audio.onended = ()=>{ window.eventHub.emit('songEnd') }
+                audio.ontimeupdate = ()=>{
+                    this.showLyrics(audio.currentTime)
+                }
             }
             if(status ==='playing'){
                 $(this.el).find('.singger-img').addClass('circleAni')
@@ -30,7 +33,25 @@
                 $(this.el).find('.bg-img').removeClass('circleAni')
                 $(this.el).find('.play-rod').removeClass('active')
             }
-            $(this.el).find('.songWords>h5').text(song.name)
+            let {lyrics} = song
+ 
+            lyrics.split('\n').map((string)=>{
+                let p = document.createElement('p')
+                let regex = /\[([\d:.]+)\](.+)/
+                let matches = string.match(regex)
+                if(matches){
+                    p.textContent = matches[2]
+                    p.setAttribute('data-time',matches[1])
+                }
+                else{
+                    p.textContent = string
+                }
+                $(this.el).find('.lyrics').append(p)
+            })
+        },
+        showLyrics(time){
+            console.log(time)
+
         },
         playSong(){
             $(this.el).find('audio')[0].play()
