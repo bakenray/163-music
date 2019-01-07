@@ -104,8 +104,13 @@ header{
 }
 .playUI>.playimgBg>.play-rod{
     width: 14vw;
-    top: -24vw;
-    left: 34.5vw;
+    top: -21vw;
+    left: 29.8vw;
+    transform: rotate(-40deg);
+    transform-origin: 10px 10px;
+    transition: all .6s ease-in-out;
+}
+.playUI>.playimgBg>.play-rod.active{
     transform: rotate(-15deg);
 }
 .playUI>.playimgControl{

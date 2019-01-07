@@ -29,11 +29,13 @@
         },
         playSong(){
             $(this.el).find('audio')[0].play()
+            $(this.el).find('.play-rod').addClass('active')
             this.removePlayBtn()
             this.startCircle()
         },
         pauseSong(){
             $(this.el).find('audio')[0].pause()
+            $(this.el).find('.play-rod').removeClass('active')
             this.addPlayBtn()
             this.stopCircle()
         },
@@ -89,13 +91,11 @@
                 this.view.render(this.model.data)
                 this.view.playSong()
             })
-
             $(this.view.el).on('click','.pause-btn',()=>{
                 this.model.data.status =  'paused'
                 this.view.render(this.model.data)
                 this.view.pauseSong()
             })
-
         },
         getSongId(){
             let search = window.location.search
@@ -104,7 +104,6 @@
             }
             let array = search.split('&').filter((v=>v))
             let id = ''
-        
             for(let i = 0;i<array.length;i++){
                 let kv =array[i].split('=')
                 let key = kv[0]
