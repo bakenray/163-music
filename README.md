@@ -1,13 +1,13 @@
-##安装依赖
+## 安装依赖
 ---
 npm install
 
-##开启node server 产生七牛的token
+## 开启node server 产生七牛的token
 ---
 获取配置的qiniu-key.json
 node server 8888
 
-##根目录开启http server
+## 根目录开启http server
 ---
 http-server -c-1
 
