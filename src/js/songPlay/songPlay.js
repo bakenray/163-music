@@ -1,7 +1,8 @@
 {
     let view={
         el:'.playBox',
-        template:`
+        template:
+        `
         <h1>{{name}}</h1>
         <h5>{{singer}}</h5>
         `,
@@ -16,43 +17,47 @@
                 .replace('{{singer}}',song.singer)
             )
             if($(this.el).find('audio').attr('src') !== song.url){
-                $(this.el).find('audio').attr('src',song.url)
+                var audio = $(this.el).find('audio').attr('src',song.url).get(0)
+                audio.onended = ()=>{ window.eventHub.emit('songEnd') }
             }
             if(status ==='playing'){
-                $(this.el).find('.singger-img').addClass('playing')
-                $(this.el).find('.bg-img').addClass('playing')
+                $(this.el).find('.singger-img').addClass('circleAni')
+                $(this.el).find('.bg-img').addClass('circleAni')
+                $(this.el).find('.play-rod').addClass('active')
             }
             else{
-                $(this.el).find('.singger-img').removeClass('playing')
-                $(this.el).find('.bg-img').removeClass('playing')
+                $(this.el).find('.singger-img').removeClass('circleAni')
+                $(this.el).find('.bg-img').removeClass('circleAni')
+                $(this.el).find('.play-rod').removeClass('active')
             }
+            $(this.el).find('.songWords>h5').text(song.name)
         },
         playSong(){
             $(this.el).find('audio')[0].play()
-            $(this.el).find('.play-rod').addClass('active')
             this.removePlayBtn()
-            this.startCircle()
+            // this.startCircle()
         },
         pauseSong(){
             $(this.el).find('audio')[0].pause()
-            $(this.el).find('.play-rod').removeClass('active')
             this.addPlayBtn()
-            this.stopCircle()
+            // this.stopCircle()
         },
-
         removePlayBtn(){
             $(this.el).find('.play-btn').removeClass('play-btn').addClass('pause-btn')
         },
         addPlayBtn(){
             $(this.el).find('.playimgControl').addClass('play-btn').removeClass('pause-btn')
         },
-        startCircle(){
-            $(this.el).find('.singger-img').addClass('circleAni')
-            $(this.el).find('.bg-img').addClass('circleAni')
-        },
-        stopCircle(){
-            $(this.el).find('.singger-img').removeClass('circleAni')
-            $(this.el).find('.bg-img').removeClass('circleAni')
+        // startCircle(){
+        //     $(this.el).find('.singger-img').addClass('circleAni')
+        //     $(this.el).find('.bg-img').addClass('circleAni')
+        // },
+        // stopCircle(){
+        //     $(this.el).find('.singger-img').removeClass('circleAni')
+        //     $(this.el).find('.bg-img').removeClass('circleAni')
+        // },
+        goback(){
+            window.history.go(-1);
         }
     }
     let model= {
@@ -95,6 +100,13 @@
                 this.model.data.status =  'paused'
                 this.view.render(this.model.data)
                 this.view.pauseSong()
+            })
+            $(this.view.el).on('click','.backBtn',()=>{
+                this.view.goback()
+            })
+            window.eventHub.on('songEnd',()=>{
+                this.model.data.status =  'paused'
+                this.view.render(this.model.data)
             })
         },
         getSongId(){
