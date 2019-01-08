@@ -41,7 +41,12 @@
                 let matches = string.match(regex)
                 if(matches){
                     p.textContent = matches[2]
-                    p.setAttribute('data-time',matches[1])
+                    let time = matches[1]
+                    let parts = time.split(':')
+                    let minutes = parts[0]
+                    let seconds = parts[1]
+                    let newTime = parseInt(minutes,10)*60 + parseFloat(seconds,10)
+                    p.setAttribute('data-time',newTime)
                 }
                 else{
                     p.textContent = string
@@ -50,8 +55,31 @@
             })
         },
         showLyrics(time){
-            console.log(time)
-
+            let allP = $(this.el).find('.lyrics>p')
+            let p
+            for(let i = 0; i<allP.length;i++){
+            
+                if(i === allP.length-1){
+                    p = allP[i]
+                    break
+                }
+                else{
+                    let currentTime =allP.eq(i).attr('data-time')
+                    let nextTime = allP.eq(i+1).attr('data-time')
+                    if(currentTime <= time && time <= nextTime){
+                       p = allP[i]
+                       break
+                    }
+                }
+            }
+            let pHeight =p.getBoundingClientRect().top
+            let lyricsHeight = $(this.el).find('.songWords')[0].getBoundingClientRect().top 
+            let height = pHeight -lyricsHeight
+            console.log(height)
+            $(this.el).find('.lyrics').css({
+                transform: `translateY(${-height+55}px)`
+            })
+            $(p).addClass('active').siblings('.active').removeClass('active')
         },
         playSong(){
             $(this.el).find('audio')[0].play()

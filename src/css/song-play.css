@@ -138,22 +138,21 @@ header{
     border-radius: 4px;
     padding:10px;
 }
-.songWords>h5{
-    text-align: center;
-    color: #fff;
-    font-size: 16px;
-    margin:10px;
-}
 .songWords>.lyrics{
+    color: rgb(165, 165, 165);
+    font-size: 16px;
+    line-height: 1.8em;
+    transition: all 1s linear;
+}
+.songWords>.lyrics>p.active{
     color: #fff;
-    font-size: 12px;
+    font-weight: bold;
 }
 .playControls{
     width:100%;
     height:10vh;
     text-align: center;
 }
-
 .play-btn{
     background-image:url(../imgs/play-btn.png);
     background-repeat: no-repeat;

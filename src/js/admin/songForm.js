@@ -25,7 +25,7 @@
                         <input name="cover" type="text" value="__cover__" autocomplete="off">
                     </div>
                     <div class="row">
-                        <label>歌曲封面：</label>
+                        <label>歌曲歌词：</label>
                         <textarea name="lyrics">__lyrics__</textarea>
                     </div>                                             
                     <div class="row submitRow">
