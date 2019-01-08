@@ -26,7 +26,7 @@
                     </div>
                     <div class="row">
                         <label>歌曲歌词：</label>
-                        <textarea name="lyrics">__lyrics__</textarea>
+                        <textarea name="lyrics" rows="5">__lyrics__</textarea>
                     </div>                                             
                     <div class="row submitRow">
                         <button type="submit">保存</button>

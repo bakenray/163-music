@@ -75,9 +75,8 @@
             let pHeight =p.getBoundingClientRect().top
             let lyricsHeight = $(this.el).find('.songWords')[0].getBoundingClientRect().top 
             let height = pHeight -lyricsHeight
-            console.log(height)
             $(this.el).find('.lyrics').css({
-                transform: `translateY(${-height+55}px)`
+                transform: `translateY(${-height + 50}px)`
             })
             $(p).addClass('active').siblings('.active').removeClass('active')
         },
